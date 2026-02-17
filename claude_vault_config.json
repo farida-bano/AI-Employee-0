@@ -1,0 +1,38 @@
+{
+  "vault_name": "Bronze Phase AI Employee",
+  "access_permissions": [
+    {
+      "path": "Bronze/Inbox",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/Needs_Action",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/Done",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/System_log.md",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/Dashboard.md",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/agent_skills.py",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/file_watcher.py",
+      "permissions": ["read", "write"]
+    },
+    {
+      "path": "Bronze/task_processor.py",
+      "permissions": ["read", "write"]
+    }
+  ],
+  "description": "Configuration for Claude AI to interact with the Bronze Phase vault, specifying read and write access to all relevant directories and files."
+}
