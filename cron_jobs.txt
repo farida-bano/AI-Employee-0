@@ -1,0 +1,8 @@
+# Cron job for AI Employee vault synchronization
+# Pull changes from Git repository every 2 minutes
+
+# Format: minute hour day month weekday command
+*/2 * * * * cd /opt/ai-employee && /bin/bash sync.sh pull >> logs/vault_sync_cron.log 2>&1
+
+# Optional: Add a daily cleanup to prevent log files from growing too large
+0 2 * * * /usr/bin/find /opt/ai-employee/logs -name "vault_sync*.log" -mtime +7 -delete >> /var/log/cleanup.log 2>&1

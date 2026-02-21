@@ -1,0 +1,7 @@
+# Cron jobs for AI Employee automated Weekly CEO Briefing
+
+# Run the automated Weekly CEO Briefing every Sunday at 9:00 AM
+0 9 * * 0 cd /opt/ai-employee && /home/ubuntu/ai-employee/venv/bin/python automated_briefing.py >> /opt/ai-employee/logs/ceo_briefing_cron.log 2>&1
+
+# Alternative: Run every Sunday at midnight (00:00)
+# 0 0 * * 0 cd /opt/ai-employee && /home/ubuntu/ai-employee/venv/bin/python automated_briefing.py >> /opt/ai-employee/logs/ceo_briefing_cron.log 2>&1

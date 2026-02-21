@@ -1,0 +1,8 @@
+# Cron jobs for AI Employee health monitoring
+# Run health checks every 5 minutes
+
+# Format: minute hour day month weekday command
+*/5 * * * * cd /opt/ai-employee && /home/ubuntu/ai-employee/venv/bin/python watchdog.py once >> /opt/ai-employee/logs/watchdog_cron.log 2>&1
+
+# Optional: Daily cleanup of old logs
+0 2 * * * /usr/bin/find /opt/ai-employee/logs -name "system_status.log*" -mtime +7 -delete >> /var/log/cleanup.log 2>&1

@@ -2,3 +2,52 @@
 .DS_Store
 *.lock
 logs/
+
+# Session files
+*.session
+*.session.json
+session/
+sessions/
+
+# Authentication tokens and keys
+*.token
+*.key
+*.pem
+*.crt
+*.cert
+api_key*
+token*
+auth_token*
+access_token*
+refresh_token*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Cache and temp files
+*.tmp
+*.temp
+tmp/
+temp/
+.cache/
+__pycache__/
+*.pyc
+
+# User-specific settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Credentials
+credentials.json
+config.json
+secrets.json
+
+# Local configuration
+local_config.json
+config.local.json
+
+# Process IDs
+*.pid
