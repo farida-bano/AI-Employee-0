@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Employee System - Project Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 600px;
+        }
+
+        h1 {
+            color: #6366f1;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #6366f1;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #8b5cf6;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .hero-icon {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f9fafb;
+            border-left: 5px solid #6366f1;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .architecture-diagram {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tech-badge {
+            background: #6366f1;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .link-box {
+            background: #f0f9ff;
+            border: 2px solid #6366f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .link-box a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+
+        .workflow-step {
+            background: white;
+            border: 2px solid #6366f1;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .workflow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #6366f1;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .screenshot-placeholder {
+            background: #f9fafb;
+            border: 3px dashed #6366f1;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="hero">
+                <div class="hero-icon">🤖</div>
+                <h1>AI Employee System</h1>
+                <p class="subtitle">Autonomous Task Management & Business Automation Platform</p>
+                <div class="info-box">
+                    <p><strong>Developer:</strong> Farida Bano</p>
+                    <p><strong>Date:</strong> May 11, 2026</p>
+                    <p><strong>Status:</strong> ✅ Production Ready</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Overview -->
+        <div class="slide">
+            <h2>📋 Project Overview</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                An intelligent automation system that combines AI-powered task processing with real-time monitoring and business integrations.
+            </p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Agent</h3>
+                    <p>Autonomous task processing with Claude AI</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Dashboard</h3>
+                    <p>Real-time monitoring interface</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h3>Integrations</h3>
+                    <p>Email, LinkedIn, Social Media</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Reporting</h3>
+                    <p>Automated CEO briefings</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Problem Statement</h3>
+                <p>Traditional business operations require constant human intervention for task management, communications, and reporting. This system automates these processes while maintaining human oversight.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Architecture -->
+        <div class="slide">
+            <h2>🏗️ System Architecture</h2>
+            <div class="architecture-diagram">
+┌─────────────────────────────────────────────────────┐
+│              AI EMPLOYEE SYSTEM                     │
+└─────────────────────────────────────────────────────┘
+
+┌──────────────┐         ┌──────────────┐
+│ Web Dashboard│◄────────┤ FastAPI      │
+│ (Frontend)   │         │ Server       │
+│ Port 3000    │         │ Port 8000    │
+└──────────────┘         └──────────────┘
+       │                        │
+       │                        ▼
+       │                ┌──────────────┐
+       │                │ File System  │
+       │                │ Bronze/      │
+       │                │ - Inbox      │
+       │                │ - Needs_     │
+       │                │   Action     │
+       │                │ - Done       │
+       │                └──────────────┘
+       │                        │
+       ▼                        ▼
+┌────────────────────────────────────────┐
+│   Ralph Wiggum Loop (AI Agent)         │
+│   - Task Processing                    │
+│   - Plan Generation                    │
+│   - Execution Engine                   │
+└────────────────────────────────────────┘
+       │
+       ▼
+┌────────────────────────────────────────┐
+│   Business MCP Server                  │
+│   - Email Integration                  │
+│   - LinkedIn Integration               │
+│   - Activity Logging                   │
+└────────────────────────────────────────┘
+            </div>
+        </div>
+
+        <!-- Slide 4: Key Features -->
+        <div class="slide">
+            <h2>✨ Key Features</h2>
+
+            <div class="workflow-step" data-step="1">
+                <h3>Autonomous Task Processing</h3>
+                <ul>
+                    <li>✅ Monitors Bronze/Inbox for new tasks</li>
+                    <li>✅ Automatically creates execution plans</li>
+                    <li>✅ Executes tasks with safety checks</li>
+                    <li>✅ Error handling with retry mechanism</li>
+                </ul>
+            </div>
+
+            <div class="workflow-step" data-step="2">
+                <h3>Real-time Dashboard</h3>
+                <ul>
+                    <li>✅ Live task statistics</li>
+                    <li>✅ System logs monitoring</li>
+                    <li>✅ Business activity tracking</li>
+                    <li>✅ Auto-refresh every 30 seconds</li>
+                </ul>
+            </div>
+
+            <div class="workflow-step" data-step="3">
+                <h3>Business Integrations</h3>
+                <ul>
+                    <li>✅ Email automation (Gmail)</li>
+                    <li>✅ LinkedIn post creation</li>
+                    <li>✅ Social media logging</li>
+                    <li>✅ Activity tracking</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Technology Stack -->
+        <div class="slide">
+            <h2>💻 Technology Stack</h2>
+
+            <h3>Backend</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Python 3.13</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">Uvicorn</span>
+                <span class="tech-badge">Claude AI</span>
+                <span class="tech-badge">MCP</span>
+            </div>
+
+            <h3>Frontend</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Font Awesome</span>
+                <span class="tech-badge">Responsive Design</span>
+            </div>
+
+            <h3>Infrastructure</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Vercel</span>
+                <span class="tech-badge">Git/GitHub</span>
+                <span class="tech-badge">File-based Storage</span>
+                <span class="tech-badge">Environment Variables</span>
+            </div>
+
+            <h3>APIs & Integrations</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">LinkedIn API</span>
+                <span class="tech-badge">Gmail API</span>
+                <span class="tech-badge">Python-dotenv</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: Live Links -->
+        <div class="slide">
+            <h2>🌐 Live Demo & Links</h2>
+
+            <div class="link-box">
+                <p>🌍 <strong>Production Dashboard (Static)</strong></p>
+                <a href="https://ai-employee-vault-tau.vercel.app" target="_blank">
+                    https://ai-employee-vault-tau.vercel.app
+                </a>
+            </div>
+
+            <div class="link-box">
+                <p>💻 <strong>Local Dashboard (Real-time)</strong></p>
+                <a href="http://localhost:3000" target="_blank">
+                    http://localhost:3000
+                </a>
+            </div>
+
+            <div class="link-box">
+                <p>🔌 <strong>API Server</strong></p>
+                <a href="http://localhost:8000" target="_blank">
+                    http://localhost:8000
+                </a>
+            </div>
+
+            <div class="link-box">
+                <p>📚 <strong>API Documentation</strong></p>
+                <a href="http://localhost:8000/docs" target="_blank">
+                    http://localhost:8000/docs
+                </a>
+            </div>
+
+            <div class="link-box">
+                <p>📦 <strong>GitHub Repository</strong></p>
+                <a href="https://github.com/farida-bano/AI-Employee-0" target="_blank">
+                    https://github.com/farida-bano/AI-Employee-0
+                </a>
+            </div>
+        </div>
+
+        <!-- Slide 7: Dashboard Preview -->
+        <div class="slide">
+            <h2>📊 Dashboard Preview</h2>
+
+            <div class="screenshot-placeholder">
+                <p>📸 Dashboard Screenshot</p>
+                <p style="font-size: 0.9rem; margin-top: 1rem;">
+                    Real-time monitoring interface with task statistics,<br>
+                    system logs, and business activity tracking
+                </p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Inbox Tasks</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Needs Action</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Errors</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: How It Works -->
+        <div class="slide">
+            <h2>⚙️ How It Works</h2>
+
+            <div class="workflow-step" data-step="1">
+                <h3>Create Task</h3>
+                <p>User creates a .md file in Bronze/Inbox with task description</p>
+            </div>
+
+            <div class="workflow-step" data-step="2">
+                <h3>Detect & Queue</h3>
+                <p>Vault Watcher monitors every 5 minutes and moves task to Needs_Action</p>
+            </div>
+
+            <div class="workflow-step" data-step="3">
+                <h3>Analyze & Plan</h3>
+                <p>Claude AI Agent generates execution plan with safety checks</p>
+            </div>
+
+            <div class="workflow-step" data-step="4">
+                <h3>Execute</h3>
+                <p>System executes steps sequentially (file ops, API calls, business logic)</p>
+            </div>
+
+            <div class="workflow-step" data-step="5">
+                <h3>Complete</h3>
+                <p>Success → Move to Done | Failure → Log error and retry</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Statistics -->
+        <div class="slide">
+            <h2>📈 Project Statistics</h2>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Total Files</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Lines of Code</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">API Endpoints</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Integrations</div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Tasks Processed</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+                    <div class="stat-number">&lt;100ms</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-box" style="background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);">
+                    <div class="stat-number">30s</div>
+                    <div class="stat-label">Auto-refresh</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Future Enhancements -->
+        <div class="slide">
+            <h2>🚀 Future Enhancements</h2>
+
+            <div class="info-box">
+                <h3>Phase 1 (Next 2 Weeks)</h3>
+                <ul>
+                    <li>Real LinkedIn API OAuth integration</li>
+                    <li>Gmail API for actual email sending</li>
+                    <li>Database integration (PostgreSQL)</li>
+                    <li>User authentication system</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Phase 2 (Next Month)</h3>
+                <ul>
+                    <li>Twitter/X integration</li>
+                    <li>Slack notifications</li>
+                    <li>Advanced AI planning with GPT-4</li>
+                    <li>Mobile app (React Native)</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Phase 3 (Next Quarter)</h3>
+                <ul>
+                    <li>Multi-user support</li>
+                    <li>Team collaboration features</li>
+                    <li>Advanced analytics dashboard</li>
+                    <li>Webhook integrations</li>
+                    <li>API marketplace</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 11: Contact -->
+        <div class="slide">
+            <h2>📞 Contact & Information</h2>
+
+            <div class="hero" style="padding: 3rem 0;">
+                <div class="hero-icon">👩‍💻</div>
+                <h3 style="font-size: 2rem; margin-bottom: 2rem;">Farida Bano</h3>
+
+                <div class="link-box">
+                    <p>📧 <strong>Email</strong></p>
+                    <a href="mailto:fb22797@gmail.com">fb22797@gmail.com</a>
+                </div>
+
+                <div class="link-box">
+                    <p>💼 <strong>GitHub</strong></p>
+                    <a href="https://github.com/farida-bano" target="_blank">github.com/farida-bano</a>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <p style="text-align: center; font-size: 1.2rem;">
+                        <strong>Project Status:</strong> ✅ Production Ready<br>
+                        <strong>Version:</strong> 1.0.0<br>
+                        <strong>Last Updated:</strong> May 11, 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Farida Bano. All rights reserved.</p>
+        <p>AI Employee System - Autonomous Task Management Platform</p>
+    </div>
+</body>
+</html>

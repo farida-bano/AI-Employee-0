@@ -1,7 +1,13 @@
 import os
 import subprocess
 import datetime # Added for timestamp
+import sys
 from mcp.server.fastmcp import FastMCP
+from linkedin_api import Linkedin
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = FastMCP(
     name="BusinessMCP",
@@ -36,43 +42,83 @@ def send_email(to: str, subject: str, body: str) -> str:
     return "Email successfully sent (simulated)."
 
 @app.tool()
-def post_linkedin(content: str) -> str:
+def post_linkedin(content: str, auto_post: bool = False) -> str:
     """
     Creates a new post on LinkedIn.
 
     Args:
         content: The text content of the LinkedIn post.
+        auto_post: If True, attempts to post automatically (requires LinkedIn API setup).
+                   If False (default), saves to approval queue.
 
     Returns:
         A confirmation message.
     """
-    # Real-world implementation would require using the LinkedIn API.
-    # This requires setting up an app on the LinkedIn Developer portal,
-    # handling OAuth 2.0 authentication, and using a library like 'requests'.
-    # For now, we simulate the action by printing to the console.
-    print(f"--- LINKEDIN POST ---")
-    print(f"Content: {content}")
-    print(f"---------------------")
-
-    # Call the social summary script after a successful LinkedIn post
     try:
-        current_time = datetime.datetime.now().isoformat()
-        # Use sys.executable to ensure the correct Python interpreter is used
-        subprocess.run(
-            [sys.executable, LOG_SOCIAL_POST_SCRIPT, "LinkedIn", content, current_time],
-            check=True, # Raise CalledProcessError if the script returns a non-zero exit code
-            capture_output=True,
-            text=True
-        )
-        print(f"Social post logged by {os.path.basename(LOG_SOCIAL_POST_SCRIPT)}")
-    except subprocess.CalledProcessError as e:
-        print(f"Error logging social post: {e.stderr}")
-    except FileNotFoundError:
-        print(f"Error: Social logging script not found at {LOG_SOCIAL_POST_SCRIPT}")
-    except Exception as e:
-        print(f"An unexpected error occurred while calling social logging script: {e}")
+        print(f"--- LINKEDIN POST REQUEST ---")
+        print(f"Content: {content}")
+        print(f"Auto-post: {auto_post}")
+        print(f"-----------------------------")
 
-    return "LinkedIn post successfully created (simulated)."
+        # Log to business log
+        log_file_path = os.path.join(
+            os.path.dirname(__file__), "..", "..", "AI_Employee_Vault", "logs", "business.log"
+        )
+        os.makedirs(os.path.dirname(log_file_path), exist_ok=True)
+
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        if auto_post:
+            # TODO: Implement real LinkedIn API posting here
+            # For now, save to approval queue
+            approval_dir = os.path.join(
+                os.path.dirname(__file__), "..", "..", "AI_Employee_Vault", "Need_Approval"
+            )
+            os.makedirs(approval_dir, exist_ok=True)
+
+            approval_file = os.path.join(
+                approval_dir,
+                f"linkedin_post_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+            )
+
+            with open(approval_file, 'w') as f:
+                f.write(f"# LinkedIn Post - Pending Approval\n\n")
+                f.write(f"**Created:** {timestamp}\n\n")
+                f.write(f"**Content:**\n\n{content}\n\n")
+                f.write(f"---\n\n")
+                f.write(f"To approve: Delete this file and manually post to LinkedIn\n")
+
+            with open(log_file_path, "a") as log_file:
+                log_file.write(f"[{timestamp}] 📝 LinkedIn post queued for approval: {content[:100]}...\n")
+
+            print(f"✅ LinkedIn post saved to approval queue: {approval_file}")
+            return f"✅ LinkedIn post queued for approval. Check: AI_Employee_Vault/Need_Approval/"
+
+        else:
+            # Direct simulation mode (for testing)
+            with open(log_file_path, "a") as log_file:
+                log_file.write(f"[{timestamp}] 🚀 LinkedIn post created (simulated): {content[:100]}...\n")
+
+            # Call the social summary script
+            try:
+                current_time = datetime.datetime.now().isoformat()
+                subprocess.run(
+                    [sys.executable, LOG_SOCIAL_POST_SCRIPT, "LinkedIn", content, current_time],
+                    check=True,
+                    capture_output=True,
+                    text=True
+                )
+                print(f"Social post logged by {os.path.basename(LOG_SOCIAL_POST_SCRIPT)}")
+            except Exception as e:
+                print(f"Error logging social post: {e}")
+
+            print("✅ LinkedIn post logged successfully!")
+            return f"✅ LinkedIn post created (simulated). Content: {content[:50]}..."
+
+    except Exception as e:
+        error_msg = f"LinkedIn post failed: {str(e)}"
+        print(f"❌ {error_msg}")
+        return error_msg
 
 @app.tool()
 def log_activity(message: str) -> str:
